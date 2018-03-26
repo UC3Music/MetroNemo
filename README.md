@@ -1,5 +1,5 @@
 # MetroGnome
-I couldn't find a better name.
+I couldn't find a better name. **WORK IN PROGRESS**
 
 ## Description
 An arduino-based metronome that can (will) vibrate.
