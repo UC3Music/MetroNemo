@@ -1,11 +1,12 @@
 /*
  * MetroNemo
  * UC3Music: https://music.uc3m.es
- * Author: Pablo Lago (https://github.com/L4g0)
- * 
+ * Authors:
+ * Pablo Lago (https://github.com/L4g0)
+ * Tommy Guns (https://github.com/MrTommyGuns)
+ *
  * An open-source arduino-based metronome.
  */ 
-#include <ArduinoTapTempo.h> //TapTempo library
 
 #define LED     8       // LED pin
 #define BUZZER  10      // Buzzer pin
@@ -71,6 +72,7 @@ void Button()
     Serial.println("MODE: Pote");  // prints on serial monitor
   }
 }
+
 void Tempo()
 {
     digitalWrite(LED, HIGH);
@@ -82,4 +84,5 @@ void Tempo()
     noTone(BUZZER);
     delay(54000 / bpm);     // 90% of T
 }
+
 
