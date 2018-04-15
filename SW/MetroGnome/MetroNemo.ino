@@ -1,7 +1,7 @@
 /*
- * MetroGnome
+ * MetroNemo
  * UC3Music: https://music.uc3m.es
- * Author: Pablo Lago (https://github.com/L4g0)
+ * Authors: Pablo Lago (https://github.com/L4g0)
  * 
  * An open-source arduino-based metronome.
  */ 
