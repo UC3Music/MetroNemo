@@ -24,10 +24,13 @@ Bounce debouncer = Bounce();  //Arduino Bounce Object
 bool but_status = 0;    // start or stop variable
 bool but_tap_status = 0;// TapTempo button status
 int mode = 0;           // Set 
-int bpm;                // bpm value
+int bpmTap;                // bpm value
+int bpmPot;                // bpm value
+unsigned long time;     // Time value
 int value;
 int aux;
 void setup() {
+  
   Serial.begin(9600);
 
   Serial.println("Started\nIncicial Tempo 120 bpm\nTap to set a Tempo or press the Mode Button");
@@ -42,26 +45,57 @@ void setup() {
   
   pinMode(TAP, INPUT); //Conf pin for Tap Tempo button
   digitalWrite(TAP, HIGH); //Conf pin for Tap Tempo button
+  time = millis(); 
 }
 
 void loop() {
+  
+/************************************************************************************MODE 1**/
   if(mode == 1){  //Metronome using TAP TEMPO
-    bpm = tapTempo.getBPM();  //Read the Tempo with the "TapTempo"
-    //Serial.println(tapTempo.getBPM());
-    Tempo();
-  }else if(mode == 2){  //Metronome using POTE
-    bpm = map(analogRead(POT), 0, 1023, MIN_BPM, MAX_BPM);  //Read the Tempo with a Pot
-    Serial.print("Tap bpm: ");  //Test the asigned Tempo
-    Tempo();
-  }else{  //Metronome STOP and Config TAP TEMPO
-    but_tap_status = digitalRead(TAP) == LOW; // get the state of the button
-    tapTempo.update(but_tap_status); // update ArduinoTapTempo
-    if(digitalRead(TAP) == HIGH){
-      //Serial.println("TAP!");
-      tone(BUZZER, 1000);
-    }else{
-      noTone(BUZZER);
+    bpmTap = tapTempo.getBPM();  //Read the Tempo that you chose with the "TapTempo"
+
+    //Metronome work
+    if (millis()-time >= 6000/bpmTap)
+    { 
+       // digitalWrite(LED, LOW);
+        noTone(BUZZER);
     }
+     if (millis()-time >= (54000/bpmTap))
+     {
+        //digitalWrite(LED, HIGH);
+        tone(BUZZER, 2000);
+        Serial.print(bpmTap);
+        Serial.println(" BPM Click!");
+         
+        time = millis(); // update current measure time 
+    }
+    
+    TapTempoFunction();  //TAP Tempo
+    
+/************************************************************************************MODE 2**/ 
+  }else if(mode == 2){  //Metronome using POTE
+    bpmPot = map(analogRead(POT), 0, 1023, MIN_BPM, MAX_BPM);  //Read the Tempo that you choose with a Pot
+
+    //Metronome work
+    if (millis()-time >= 6000/bpmPot)
+    { 
+        digitalWrite(LED, LOW);
+        noTone(BUZZER);
+    }
+     if (millis()-time >= (54000/bpmPot))
+     {
+        digitalWrite(LED, HIGH);
+        tone(BUZZER, 2000);
+        Serial.print(bpmPot);
+        Serial.println(" BPM Click!");
+         
+        time = millis(); // update current measure time 
+    }
+    
+/************************************************************************************MODE 0**/
+  }else{  //Metronome STOP and Config TAP TEMPO
+    TapTempoFunction();
+    time = millis();
   }/*
   if(digitalRead(MOD)==HIGH){
     Serial.println("IF");
@@ -85,18 +119,19 @@ void Button(){
   }
 }
 
-void Tempo(){
-    digitalWrite(LED, HIGH);
-    tone(BUZZER, 2000);
-    Serial.print(bpm);
-    Serial.println(" BPM Click!");
-    delay(6000/bpm);        // 10% of T (where T is the time between two BPSs)
-    digitalWrite(LED, LOW);
-    noTone(BUZZER);
-    delay(54000 / bpm);     // 90% of T
+void TapTempoFunction(){ //TAP Tempo
+  
+    but_tap_status = digitalRead(TAP) == LOW; // get the state of the button
+    tapTempo.update(but_tap_status); // update ArduinoTapTempo
+    if(digitalRead(TAP) == HIGH){
+      //Serial.println("TAP!");
+      tone(BUZZER, 1000);
+    }else{
+      noTone(BUZZER);
+    }
 }
 
-void Check(){
+void Check(){ //Check if the button is pressed
   but_status = !but_status; // toggle but_status
   Button();
 }
