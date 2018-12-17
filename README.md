@@ -15,3 +15,4 @@ This project is based on the Soundbrenner Pulse metronome (https://www.soundbren
 - LED(s) (4 fun)
 - Battery
 - USB charguer
+- OLED (or some kind of) display
