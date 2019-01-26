@@ -1,8 +1,9 @@
-# MetroNemo
-**WORK IN PROGRESS**
 
-![MetroNemo Logo](https://github.com/UC3Music/MetroNemo/blob/master/img/logo.png)
-<img src="https://github.com/UC3Music/MetroNemo/blob/master/img/image.png" width="400" alt="ESP32 Prototype">
+**WORK IN PROGRESS**
+<p align="center"><img src="https://github.com/UC3Music/MetroNemo/blob/master/img/logo.png" height="200" alt="MetroNemo logo"></p>
+
+
+
 ## Description
 An arduino-based metronome that can (will) vibrate.
 This project is based on the Soundbrenner Pulse metronome (https://www.soundbrenner.com/).
@@ -16,3 +17,7 @@ This project is based on the Soundbrenner Pulse metronome (https://www.soundbren
 - Battery
 - USB charguer
 - OLED (or some kind of) display
+
+<p align="center"><img src="https://github.com/UC3Music/MetroNemo/blob/master/img/image.png" height="250" alt="ESP32 Prototype"></p>
+
+<p align="center"> Current prototype </p>
