@@ -4,7 +4,7 @@
  * Authors:
  * Pablo Lago (https://github.com/L4g0)
  * Tommy Guns (https://github.com/MrTommyGuns)
- *
+ * Bruno Ribeiro (https://github.com/brunorchaves)
  * An open-source arduino-based vibrating metronome.
  */
  
